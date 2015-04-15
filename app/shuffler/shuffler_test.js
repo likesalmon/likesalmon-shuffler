@@ -8,13 +8,18 @@ describe('myApp.shuffler module', function () {
         var $scope,
             cardSrvc;
 
-        beforeEach(inject(function ($rootScope, $controller) {
+        beforeEach(inject(function ($rootScope, $controller, $injector) {
             $scope = $rootScope.$new();
-            $controller('ShufflerCtrl', { $scope: $scope });
+            cardSrvc = $injector.get('cardSrvc');
+            $controller('ShufflerCtrl', {
+                $scope: $scope,
+                cardSrvc: cardSrvc
+            });
+
         }));
 
-        it('should exist', function () {
-           expect($scope.foo).toBe('bar');
+        it('should have a deck property', function () {
+            expect($scope.deck).toBeDefined();
         });
 
     });
@@ -31,13 +36,56 @@ describe('myApp.shuffler module', function () {
             expect(!!cardSrvc).toBe(true);
         });
 
-        it('should return a single suit', function () {
-            var suit = cardSrvc.createSuit('spades');
-            expect(typeof suit).toBe('Array');
+        describe('createSuit()', function () {
+            it('should return a single suit', function () {
+                var suit = cardSrvc.createSuit('spades');
+                expect(suit instanceof Array).toBe(true);
+                expect(suit.length).toBe(13);
 
-            suit.forEach(function () {
-                // body...
-            })
+                suit.forEach(function (card) {
+                    expect(card.face).toBeDefined();
+                    expect(typeof card.face).toBe('string');
+                    expect(card.suit).toBeDefined();
+                    expect(typeof card.suit).toBe('string');
+                    expect(card.order).toBeDefined();
+                    expect(typeof card.order).toBe('string');
+                });
+            });
         });
-    })
+
+        describe('createDeck()', function () {
+            it('should return a deck of 52 cards', function () {
+                var deck = cardSrvc.createDeck();
+                expect(deck instanceof Array).toBe(true);
+                expect(deck.length).toBe(52);
+
+                deck.forEach(function (card) {
+                    expect(card.face).toBeDefined();
+                    expect(typeof card.face).toBe('string');
+                    expect(card.suit).toBeDefined();
+                    expect(typeof card.suit).toBe('string');
+                    expect(card.order).toBeDefined();
+                    expect(typeof card.order).toBe('string');
+                });
+            });
+        });
+
+        xdescribe('shuffle()', function () {
+            it('should randomize the order of cards in a deck', function () {
+                var deck = cardSrvc.createDeck();
+
+                cardSrvc.shuffle(deck);
+                console.error(deck);
+            });
+        });
+
+        xdescribe('order', function () {
+            it('should re-order the cards in a deck', function () {
+                var suit = cardSrvc.createSuit('spades');
+
+
+            });
+        });
+    });
+
 });
