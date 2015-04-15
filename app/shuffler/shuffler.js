@@ -122,7 +122,7 @@ app.directive('shufflerSuit', [function () {
             suit: '@'
         },
         replace: true,
-        template: '<div class="{{color}}">{{face}}</div>',
+        template: '<div class="suit {{color}}">{{face}}</div>',
         link: function (scope, element, attrs) {
             var suits = {
                 'clubs': {
