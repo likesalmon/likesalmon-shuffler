@@ -92,17 +92,24 @@ app.factory('cardSrvc', ['lodash', function (lodash) {
         return deck;
     };
 
-    var shuffle = function (deck) {
-        return lodash.shuffle(deck);
+    var deck = createDeck();
+
+    var getDeck = function () {
+        return deck;
+    };
+
+    var shuffle = function () {
+        deck = lodash.shuffle(deck);
     };
 
     var sort = function () {
-
+        deck = lodash.sortByAll(deck, ['suit', 'order']);
     };
 
     return {
         createSuit: createSuit,
         createDeck: createDeck,
+        getDeck: getDeck,
         shuffle: shuffle,
         sort: sort
     };
@@ -120,7 +127,7 @@ app.directive('shufflerSuit', [function () {
             var suits = {
                 'clubs': {
                     char: '\u2663',// '&clubs;',
-                    color: 'red'
+                    color: 'black'
                 },
                 'spades': {
                     char: '\u2660',
@@ -142,8 +149,16 @@ app.directive('shufflerSuit', [function () {
     };
 }]);
 
-app.controller('ShufflerCtrl', ['$scope', 'cardSrvc', function($scope, cardSrvc) {
-    $scope.deck = cardSrvc.createDeck();
-    // $scope.shuffle = cardSrvc.shuffle();
-    // $scope.sort = cardSrvc.sort();
+app.controller('ShufflerCtrl', ['$scope', 'cardSrvc', 'lodash', function($scope, cardSrvc, lodash) {
+    $scope.deck = cardSrvc.getDeck();
+
+    $scope.shuffle = function () {
+        cardSrvc.shuffle();
+        $scope.deck = cardSrvc.getDeck();
+    };
+
+    $scope.sort = function () {
+        cardSrvc.sort();
+        $scope.deck = cardSrvc.getDeck();
+    };
 }]);
