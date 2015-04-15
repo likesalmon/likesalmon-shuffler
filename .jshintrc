@@ -8,7 +8,6 @@
     "beforeEach": false,
     "afterEach": false,
     "module": false,
-    "inject": false,
-    "window": true
+    "inject": false
   }
 }
