@@ -10,8 +10,4 @@ angular.module('myApp', [
     $routeProvider.otherwise({
         redirectTo: '/shuffler'
     });
-}])
-.constant('_', window._)
-.run(['$rootScope', function ($rootScope) {
-    $rootScope._ = window._;
 }]);
