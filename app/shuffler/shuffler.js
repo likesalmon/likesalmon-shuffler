@@ -142,12 +142,6 @@ app.directive('shufflerSuit', [function () {
     };
 }]);
 
-app.filter('html',function($sce){
-    return function(input){
-        return $sce.trustAsHtml(input);
-    };
-});
-
 app.controller('ShufflerCtrl', ['$scope', 'cardSrvc', function($scope, cardSrvc) {
     $scope.deck = cardSrvc.createDeck();
 
