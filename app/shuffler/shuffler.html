@@ -1,10 +1,13 @@
 <h1>Shuffler</h1>
 
-{{ foo }}
+<div class="container">
+    <button ng-click="shuffle()">Shuffle</button>
+    <button ng-click="sort()">Sort</button>
+</div>
 
 <div class="container">
-    <div id="card-{{ id }}" class="card" ng-repeat="card in cards">
-        <div class="number">{{ number }}</div>
-        <div class="suit" shuffler-suit="{{ suit }}">&clubs; &spades; &hearts; &diams;</div>
+    <div class="card {{card.color}}" data-order="{{card.order}}" ng-repeat="card in deck">
+        <div class="face">{{ card.face }}</div>
+        <shuffler-suit suit="{{ card.suit }}"></shuffler-suit>
     </div>
 </div>
