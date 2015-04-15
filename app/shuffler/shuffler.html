@@ -1,12 +1,12 @@
 <h1>Shuffler</h1>
 
 <div class="container">
-    <button ng-click="shuffle()">Shuffle</button>
-    <button ng-click="sort()">Sort</button>
+    <button id="shuffle-button" ng-click="shuffle()">Shuffle</button>
+    <button id="sort-button" ng-click="sort()">Sort</button>
 </div>
 
 <div class="container">
-    <div class="card {{card.color}}" data-order="{{card.order}}" ng-repeat="card in deck">
+    <div class="card" data-order="{{card.order}}" ng-repeat="card in deck">
         <div class="face">{{ card.face }}</div>
         <shuffler-suit suit="{{ card.suit }}"></shuffler-suit>
     </div>
