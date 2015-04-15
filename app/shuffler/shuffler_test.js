@@ -70,7 +70,7 @@ describe('myApp.shuffler module', function () {
             });
         });
 
-        xdescribe('shuffle()', function () {
+        describe('shuffle()', function () {
             it('should randomize the order of cards in a deck', function () {
                 var deck = cardSrvc.createDeck();
 
