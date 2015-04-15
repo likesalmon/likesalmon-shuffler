@@ -1,1 +1,10 @@
-<p>This is the partial for view 1.</p>
+<h1>Shuffler</h1>
+
+{{ foo }}
+
+<div class="container">
+    <div id="card-{{ id }}" class="card" ng-repeat="card in cards">
+        <div class="number">{{ number }}</div>
+        <div class="suit" shuffler-suit="{{ suit }}">&clubs; &spades; &hearts; &diams;</div>
+    </div>
+</div>

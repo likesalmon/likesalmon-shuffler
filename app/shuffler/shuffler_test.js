@@ -1,16 +1,43 @@
 'use strict';
 
-describe('myApp.view1 module', function() {
+describe('myApp.shuffler module', function () {
 
-    beforeEach(module('myApp.view1'));
+    beforeEach(module('myApp.shuffler'));
 
-    describe('view1 controller', function(){
+    describe('shuffler controller', function (){
+        var $scope,
+            cardSrvc;
 
-        it('should ....', inject(function($controller) {
-            //spec body
-            var view1Ctrl = $controller('View1Ctrl');
-            expect(view1Ctrl).toBeDefined();
+        beforeEach(inject(function ($rootScope, $controller) {
+            $scope = $rootScope.$new();
+            $controller('ShufflerCtrl', { $scope: $scope });
         }));
 
+        it('should exist', function () {
+           expect($scope.foo).toBe('bar');
+        });
+
     });
+
+
+    describe('cardSrvc', function () {
+        var cardSrvc;
+
+        beforeEach(inject(function ($injector) {
+            cardSrvc = $injector.get('cardSrvc');
+        }));
+
+        it('should exist', function () {
+            expect(!!cardSrvc).toBe(true);
+        });
+
+        it('should return a single suit', function () {
+            var suit = cardSrvc.createSuit('spades');
+            expect(typeof suit).toBe('Array');
+
+            suit.forEach(function () {
+                // body...
+            })
+        });
+    })
 });
