@@ -72,18 +72,19 @@ describe('myApp.shuffler module', function () {
 
         describe('shuffle()', function () {
             it('should randomize the order of cards in a deck', function () {
-                var deck = cardSrvc.createDeck();
-
-                cardSrvc.shuffle(deck);
-                console.error(deck);
+                var deck = cardSrvc.getDeck();
+                cardSrvc.shuffle();
+                expect(_.isEqual(deck, cardSrvc.getDeck())).toBe(false);
             });
         });
 
-        xdescribe('order', function () {
+        describe('sort()', function () {
             it('should re-order the cards in a deck', function () {
-                var suit = cardSrvc.createSuit('spades');
+                var deck = cardSrvc.getDeck();
+                cardSrvc.shuffle();
+                cardSrvc.sort();
 
-
+                expect(_.isEqual(deck, cardSrvc.getDeck())).toBe(true);
             });
         });
     });
