@@ -5,9 +5,13 @@ angular.module('myApp', [
     'ngRoute',
     'myApp.shuffler',
     'myApp.version'
-]).
-config(['$routeProvider', function($routeProvider) {
+])
+.config(['$routeProvider', function($routeProvider) {
     $routeProvider.otherwise({
         redirectTo: '/shuffler'
     });
+}])
+.constant('_', window._)
+.run(['$rootScope', function ($rootScope) {
+    $rootScope._ = window._;
 }]);
