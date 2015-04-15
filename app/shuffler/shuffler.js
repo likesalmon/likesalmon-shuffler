@@ -80,7 +80,7 @@ app.factory('cardSrvc', ['lodash', function (lodash) {
         ];
     };
 
-    var suits = ['spades', 'hearts', 'clubs', 'diamonds'];
+    var suits = ['clubs', 'diamonds', 'hearts', 'spades'];
 
     var createDeck = function () {
         var deck = [];
