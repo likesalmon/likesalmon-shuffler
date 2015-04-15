@@ -7,13 +7,17 @@ Shuffle some cards, then organize them again!
     $ npm install
     $ npm start
 
-In your browser, go to:
+In your browser, navigate to:
 
     http://localhost:8000/app/#/shuffler
 
 ## Tests
 
 Run unit tests with:
+
+    $ npm test-single-run
+
+Watch tests with:
 
     $ npm test
 
