@@ -1,6 +1,6 @@
 'use strict';
 
-var app = angular.module('myApp.shuffler', ['ngRoute']);
+var app = angular.module('myApp.shuffler', ['ngRoute', 'ngLodash']);
 
 app.config(['$routeProvider', function($routeProvider) {
     $routeProvider.when('/shuffler', {
@@ -9,7 +9,7 @@ app.config(['$routeProvider', function($routeProvider) {
     });
 }]);
 
-app.factory('cardSrvc', [function () {
+app.factory('cardSrvc', ['lodash', function (lodash) {
     var createSuit = function (suit) {
         return [
             {
@@ -93,7 +93,7 @@ app.factory('cardSrvc', [function () {
     };
 
     var shuffle = function (deck) {
-        return _.shuffle(deck);
+        return lodash.shuffle(deck);
     };
 
     var sort = function () {
@@ -144,7 +144,6 @@ app.directive('shufflerSuit', [function () {
 
 app.controller('ShufflerCtrl', ['$scope', 'cardSrvc', function($scope, cardSrvc) {
     $scope.deck = cardSrvc.createDeck();
-
     // $scope.shuffle = cardSrvc.shuffle();
     // $scope.sort = cardSrvc.sort();
 }]);
