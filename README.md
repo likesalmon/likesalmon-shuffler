@@ -2,6 +2,8 @@
 
 Shuffle some cards, then organize them again!
 
+This project can be found on [github](git@github.com:likesalmon/likesalmon-shuffler.git).
+
 ## Quickstart
 
     $ npm install
