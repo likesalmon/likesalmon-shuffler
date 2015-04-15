@@ -1,56 +1,56 @@
 'use strict';
 
-var app = angular.module('myApp.shuffler', ['ngRoute'])
+var app = angular.module('myApp.shuffler', ['ngRoute']);
 
 app.config(['$routeProvider', function($routeProvider) {
     $routeProvider.when('/shuffler', {
         templateUrl: 'shuffler/shuffler.html',
         controller: 'ShufflerCtrl'
     });
-}])
+}]);
 
 app.factory('cardSrvc', [function () {
-    var createSuit = function (suit) { 
+    var createSuit = function (suit) {
         return [
             {
                 face: 'A',
                 suit: suit,
-                order: 1
+                order: '1'
             },
             {
                 face: '2',
                 suit: suit,
-                order: 2
+                order: '2'
             },
             {
                 face: '3',
                 suit: suit,
-                order: 3
+                order: '3'
             },
             {
                 face: '4',
                 suit: suit,
-                order: 4
+                order: '4'
             },
             {
                 face: '5',
                 suit: suit,
-                order: 5
+                order: '5'
             },
             {
                 face: '6',
                 suit: suit,
-                order: 6
+                order: '6'
             },
             {
                 face: '7',
                 suit: suit,
-                order: 7
+                order: '7'
             },
             {
                 face: '8',
                 suit: suit,
-                order: 8
+                order: '8'
             },
             {
                 face: '9',
@@ -85,23 +85,72 @@ app.factory('cardSrvc', [function () {
     var createDeck = function () {
         var deck = [];
 
-        _.foreach(suits, function (suit, i) {
-            deck.push(createSuit(suit));
+        angular.forEach(suits, function (suit, i) {
+            deck = deck.concat(createSuit(suit));
         });
 
-        return deck();
-    }
+        return deck;
+    };
+
+    var shuffle = function (deck) {
+        return _.shuffle(deck);
+    };
+
+    var sort = function () {
+
+    };
 
     return {
         createSuit: createSuit,
-        createDeck: createDeck
-    }
-}])
+        createDeck: createDeck,
+        shuffle: shuffle,
+        sort: sort
+    };
+}]);
 
-app.controller('ShufflerCtrl', ['$scope', function($scope) {
-    $scope.foo = 'bar';
-}])
+app.directive('shufflerSuit', [function () {
+    return {
+        restrict: 'E',
+        scope: {
+            suit: '@'
+        },
+        replace: true,
+        template: '<div class="{{color}}">{{face}}</div>',
+        link: function (scope, element, attrs) {
+            var suits = {
+                'clubs': {
+                    char: '\u2663',// '&clubs;',
+                    color: 'red'
+                },
+                'spades': {
+                    char: '\u2660',
+                    color: 'black'
+                },
+                'hearts': {
+                    char: '\u2665',
+                    color: 'red'
+                },
+                'diamonds': {
+                    char: '\u2666',
+                    color: 'red'
+                }
+            };
 
-// .directive('shufflerSuit', [function () {
-    
-// }]);
+            scope.face = suits[attrs.suit].char;
+            scope.color = suits[attrs.suit].color;
+        }
+    };
+}]);
+
+app.filter('html',function($sce){
+    return function(input){
+        return $sce.trustAsHtml(input);
+    };
+});
+
+app.controller('ShufflerCtrl', ['$scope', 'cardSrvc', function($scope, cardSrvc) {
+    $scope.deck = cardSrvc.createDeck();
+
+    // $scope.shuffle = cardSrvc.shuffle();
+    // $scope.sort = cardSrvc.sort();
+}]);
