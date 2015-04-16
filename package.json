@@ -10,6 +10,7 @@
     "http-server": "^0.6.1",
     "jasmine-core": "^2.2.0",
     "jasmine-reporters": "^2.0.5",
+    "jasmine-spec-reporter": "^2.1.0",
     "karma": "^0.12.31",
     "karma-jasmine": "^0.2.2",
     "karma-junit-reporter": "^0.2.2",
