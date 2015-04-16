@@ -9,9 +9,11 @@
     "afterEach": false,
     "module": false,
     "inject": false,
-    "_": false,
+    "$": false,
     "browser": false,
     "element": false,
-    "by": false
+    "by": false,
+    "exports": false,
+    "require": false
   }
 }
