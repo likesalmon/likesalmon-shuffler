@@ -15,7 +15,14 @@ exports.config = {
 
     framework: 'jasmine',
 
+    /* does not work with jasmine < 2.0 */
+    onPrepare: function() {
+        var SpecReporter = require('jasmine-spec-reporter');
+        jasmine.getEnv().addReporter(new SpecReporter({displayStacktrace: true}));
+    },
+
     jasmineNodeOpts: {
-        defaultTimeoutInterval: 30000
+        defaultTimeoutInterval: 30000,
+        print: function () {}
     }
 };
